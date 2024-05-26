@@ -32,8 +32,19 @@ const userSchema = new mongoose.Schema({
     },
 
     collection: {
-        type: Array,
-        default: [] 
+        type: [{
+            gameInfo: {},
+            gameStatus: String,
+            gameRating: Number,
+            gameReview: String
+        }],
+
+        default: [{
+            gameInfo: {},
+            gameStatus: 'Not started',
+            gameRating: 0,
+            gameReview: ''
+        }]
     }
 
 

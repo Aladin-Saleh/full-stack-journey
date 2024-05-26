@@ -13,7 +13,9 @@ require('./databases/mongod.database');
 const { checkToken, isLoggedIn } = require('./middlewares/auth.middleware'); 
 
 
-const authRoutes = require('./routes/authentification.routes');
+const authRoutes    = require('./routes/authentification.routes');
+const apiRoutes     = require('./routes/api.routes');
+const collRoutes    = require('./routes/collection.routes');
 
 
 
@@ -46,6 +48,8 @@ app.get('/api',checkToken, (req, res) => {
 });
 
 app.use('/auth', authRoutes);
+app.use('/ext', checkToken, apiRoutes);
+app.use('/collection', checkToken, collRoutes);
 
 
 app.listen(PORT, () => {
