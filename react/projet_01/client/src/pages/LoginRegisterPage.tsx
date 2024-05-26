@@ -14,6 +14,8 @@ export function LoginRegisterPage() {
 
     const [isLogin, setIsLogin] = useState(true);
 
+    
+
 
     return (
         <div className="flex justify-center items-center h-screen bg-gradient-to-r from-cyan-500 to-blue-500">
