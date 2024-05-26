@@ -31,6 +31,11 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+    // has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.
+    if (req.method === 'OPTIONS') { 
+        return res.sendStatus(200);
+    }
     next();
 });
 

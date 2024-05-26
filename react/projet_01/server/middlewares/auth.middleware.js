@@ -42,7 +42,8 @@ module.exports.isLoggedIn = (req, res, next) => {
                 console.log("Cookie is valid ! ", user);
                 res.locals.user = {
                     username: user.username,
-                    email: user.email
+                    email: user.email,
+                    collection: user.collection
                 }
                 next();
             }

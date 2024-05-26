@@ -53,7 +53,8 @@ module.exports.login = async (req, res) => {
             message: 'User logged in successfully',
             user: {
                 username: user.username,
-                email: user.email
+                email: user.email,
+                collection: user.collection
             }
         });
 
