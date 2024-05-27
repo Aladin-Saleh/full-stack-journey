@@ -23,6 +23,7 @@ export default function Register(props: any) {
         })
         .then((res) => setMessage(res.data.message))
         .catch((err) => setMessage(err.response.data.reason?.username || err.response.data.reason?.email || err.response.data.reason?.password));
+        
     };
 
 

@@ -13,6 +13,7 @@ export default function Login(props: any) {
     const handleSubmit = (e: any) => {
         e.preventDefault();
         login(props.email, props.password)
+        
     };
 
 

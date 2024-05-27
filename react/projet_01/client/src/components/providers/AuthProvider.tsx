@@ -21,8 +21,10 @@ export default function AuthProvider({ children }: any) {
                 },
                 withCredentials: true
             })
-
+            console.log(response.data.user);
+            
             setUser(response.data.user);
+            window.location.replace('/');
         } catch (error) {
             console.log("Login Failed ", error)
             
@@ -52,6 +54,7 @@ export default function AuthProvider({ children }: any) {
           setUser(response.data.user);
         } catch {
           setUser(null);
+          window.location.replace('/auth');
         }
     };
 

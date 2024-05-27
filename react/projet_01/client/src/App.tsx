@@ -15,7 +15,6 @@ export function App() {
     return (
         <div>
         <Navbar />
-
         </div>
     )
 }

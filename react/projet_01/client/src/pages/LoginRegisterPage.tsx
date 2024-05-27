@@ -5,6 +5,7 @@ import Login from '../components/logins/Login';
 import Register from '../components/logins/Register';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { useAuth } from '../components/providers/AuthProvider';
 
 export function LoginRegisterPage() {
 
@@ -14,8 +15,9 @@ export function LoginRegisterPage() {
 
     const [isLogin, setIsLogin] = useState(true);
 
-    
+    const { user } = useAuth();
 
+    if (user) window.location.replace('/profil');
 
     return (
         <div className="flex justify-center items-center h-screen bg-gradient-to-r from-cyan-500 to-blue-500">
