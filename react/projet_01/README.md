@@ -63,3 +63,8 @@ Création de l'interface avec les différentes fonctionnalités de l'application
 Intégration de l'API RAWG pour récupérer les informations sur les jeux.  
 Mise en place des routes sur l'interface avec react-router-dom.  
 Il ne reste plus qu'à ajouter le filtrage, la modification (pour noté les jeux), la suppression et la recherche du profil d'un autre utilisateur.
+
+**Jour 3 :** (56min)  
+Le projet est terminé, il ne reste plus qu'à le déployer sur Heroku.  
+Il faudra également ajouter une page d'accueil pour présenter l'application et les fonctionnalités principales.  
+
