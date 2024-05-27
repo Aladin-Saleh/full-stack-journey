@@ -21,7 +21,7 @@ export default function Profile() {
             {/* <AddGame /> */}
             {user.collection.length > 0 ? (
                 <div className="flex flex-wrap justify-center items-center overflow-auto max-w-9xl mx-auto my-4" style={{ maxHeight: '800px' }}>
-                    <ShowGames games={user.collection} />
+                    <ShowGames games={user.collection} openModal={true}/>
                 </div>
             ) : (<div className="text-white text-lg font-bold">No games in collection, start adding some!</div>)}
             <User user={user} logout={logout} />

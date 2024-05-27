@@ -47,12 +47,17 @@ export default function AddGame() {
                     className="max-w-xl bg-white rounded-md shadow-md p-2 text-center text-lg font-bold"
                 />
             </div>
+            <div className="w-full flex justify-center items-center text-center text-lg font-bold p-4 text-white">
+                Add games to your collection and keep track of your progress! Search for a game above.
+            </div>
             {game.length > 0 ? (
-                <div className="flex flex-wrap justify-center items-center overflow-auto max-w-9xl mx-auto my-4" style={{maxHeight: '800px'}}>
-                    <ShowGame games={game} />
+                <div className="flex flex-wrap justify-center items-center overflow-auto max-w-9xl mx-auto my-4" style={{ maxHeight: '800px' }}>
+                    <ShowGame games={game} openModal={false} />
                 </div>
 
             ) : null}
+
+
         </div>
 
 
