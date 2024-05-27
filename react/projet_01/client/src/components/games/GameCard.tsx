@@ -42,7 +42,7 @@ export default function GameCard(props: any) {
 
     useEffect(() => {
         user.collection.forEach((game: any) => {
-            if (game.gameInfo.id === props.game.id) setIsAdded(true);
+            if (game.gameInfo?.id === props.game?.id) setIsAdded(true);
         })
 
     }, [isAdded, user.collection, props.game.id])

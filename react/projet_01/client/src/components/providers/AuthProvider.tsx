@@ -40,6 +40,7 @@ export default function AuthProvider({ children }: any) {
                 withCredentials: true
             })
             setUser(null);
+            window.location.replace('/auth');
         } catch (error) {
             setUser(null);            
         }
