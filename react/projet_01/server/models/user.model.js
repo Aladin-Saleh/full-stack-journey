@@ -37,13 +37,6 @@ const userSchema = new mongoose.Schema({
             gameStatus: String,
             gameRating: Number,
             gameReview: String
-        }],
-
-        default: [{
-            gameInfo: {},
-            gameStatus: 'Not started',
-            gameRating: 0,
-            gameReview: ''
         }]
     }
 
