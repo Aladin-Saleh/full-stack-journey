@@ -68,3 +68,7 @@ Il ne reste plus qu'à ajouter le filtrage, la modification (pour noté les jeux
 Le projet est terminé, il ne reste plus qu'à le déployer sur Heroku.  
 Il faudra également ajouter une page d'accueil pour présenter l'application et les fonctionnalités principales.  
 
+Video preview :  
+https://github.com/Aladin-Saleh/full-stack-journey/assets/67257097/f2e88805-1414-466d-ac90-c6e2a0d21ce3
+
+

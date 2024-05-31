@@ -1,0 +1,290 @@
+{
+	"info": {
+		"_postman_id": "e47e0be4-f89f-4365-a81c-24827e626d51",
+		"name": "Projet_01",
+		"description": "Collection des routes pour le projet_01",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17618662"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Ala3\",\r\n    \"password\": \"aladin123\",\r\n    \"email\": \"ala3@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3081/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3081",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"aladin@gmail.com\",\r\n    \"password\": \"aladin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3081/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3081",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3081/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3081",
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Api Tierces",
+			"item": [
+				{
+					"name": "Get a list of games",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"aladin@gmail.com\",\r\n    \"password\": \"aladin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3081/ext/games",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3081",
+							"path": [
+								"ext",
+								"games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a list of games by search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"aladin@gmail.com\",\r\n    \"password\": \"aladin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3081/ext/games/2077",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3081",
+							"path": [
+								"ext",
+								"games",
+								"2077"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Collection",
+			"item": [
+				{
+					"name": "Add a game to the collection",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gameInfo\": {\r\n        \"genre\":{},\r\n        \"id\": 123,\r\n        \"name\": \"Game_Name\",\r\n        \"released\":\"\",\r\n        \"rating\":4,\r\n        \"background_image\":\"\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3081/collection/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3081",
+							"path": [
+								"collection",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the collection",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gameInfo\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3081/collection/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3081",
+							"path": [
+								"collection",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a game from the collection",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gameInfo\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3081/collection/delete/665357544c13ba25baaf4f6f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3081",
+							"path": [
+								"collection",
+								"delete",
+								"665357544c13ba25baaf4f6f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a game from the collection",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"gameStatus\" : \"souhaite jouer\", \r\n    \"gameRating\" : \"0\", \r\n    \"gameReview\" : \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3081/collection/update/665357544c13ba25baaf4f6f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3081",
+							"path": [
+								"collection",
+								"update",
+								"665357544c13ba25baaf4f6f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
