@@ -33,6 +33,6 @@ public class QuestionEntity extends AbstractEntity {
     private QuizzEntity quizz;
 
     @Column(name = "response")
-    private ChoiceEntity reponse;
+    private ChoiceEntity response;
 
 }

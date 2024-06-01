@@ -24,5 +24,6 @@ public class UserEntity extends AbstractEntity {
 
     @Column(name = "password")
     private String password;
-    
+
+
 }
