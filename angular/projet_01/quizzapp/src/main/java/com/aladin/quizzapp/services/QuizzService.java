@@ -11,6 +11,12 @@ public interface QuizzService {
 
     List<QuizzDTO> findByTitle(String title);
 
+    List<QuizzDTO> findByTeacher(String teacherName);
+
     QuizzDTO findById(Integer id);
+
+    QuizzDTO save(QuizzDTO quizzDTO);
+
+    void delete(Integer id);
     
 }

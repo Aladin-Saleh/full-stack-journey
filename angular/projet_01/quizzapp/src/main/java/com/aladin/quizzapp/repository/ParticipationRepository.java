@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.aladin.quizzapp.models.ParticipationEntity;
 
-public interface ParticipationRepository extends JpaRepository<Integer, ParticipationEntity> {
+public interface ParticipationRepository extends JpaRepository<ParticipationEntity, Integer> {
 
 }
