@@ -17,6 +17,8 @@ public interface QuizzService {
 
     QuizzDTO save(QuizzDTO quizzDTO);
 
+    QuizzDTO update(QuizzDTO quizzDTO);
+
     void delete(Integer id);
     
 }

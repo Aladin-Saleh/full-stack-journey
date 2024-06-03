@@ -48,6 +48,11 @@ public class QuizzController implements QuizzAPI{
     }
 
     @Override
+    public QuizzDTO update(QuizzDTO quizzDTO) {
+        return quizzService.update(quizzDTO);
+    }
+
+    @Override
     public void delete(Integer id) {
         quizzService.delete(id);
     }

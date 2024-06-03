@@ -82,6 +82,26 @@ public class QuizzServiceImplementation implements QuizzService {
         return QuizzDTO.fromEntity(quizzRepository.save(QuizzDTO.toEntity(quizzDTO)));
     }
 
+
+    @Override
+    public QuizzDTO update(QuizzDTO quizzDTO) {
+        
+        List<String> errors = QuizzValidator.validate(quizzDTO);
+        QuizzDTO isQuizzExist = QuizzDTO.fromEntity(this.quizzRepository.findById(QuizzDTO.toEntity(quizzDTO).getId()).orElse(null));
+
+        if (isQuizzExist == null) {
+            log.error("The quizz provided doesn't exist !", quizzDTO.getId());
+            throw new InvalidEntityException("The quizz provided doesn't exist !", ErrorCodes.QUIZZ_NOT_VALID);
+        }
+
+        if (!errors.isEmpty()) {
+            log.error("Quizz do not have a valid format !", errors);
+            throw new InvalidEntityException("Quizz do not have a valid format !", ErrorCodes.QUIZZ_NOT_VALID, errors);
+        }
+
+        return QuizzDTO.fromEntity(quizzRepository.save(QuizzDTO.toEntity(quizzDTO)));
+    }
+
     @Override
     public List<QuizzDTO> findByTeacher(String teacherName) {
 
@@ -109,7 +129,16 @@ public class QuizzServiceImplementation implements QuizzService {
             return;
         }
 
+        QuizzDTO isQuizzExist = QuizzDTO.fromEntity(this.quizzRepository.findById(id).orElse(null));
+
+        if (isQuizzExist == null) {
+            log.error("The quizz provided doesn't exist !", id);
+            throw new InvalidEntityException("The quizz provided doesn't exist !", ErrorCodes.QUIZZ_NOT_VALID);
+        }
+
         this.quizzRepository.deleteById(id);
     }
+
+
 
 }
