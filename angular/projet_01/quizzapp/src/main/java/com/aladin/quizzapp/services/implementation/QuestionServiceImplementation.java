@@ -20,6 +20,10 @@ public class QuestionServiceImplementation implements QuestionService {
 
     private QuestionRepository questionRepository;
 
+    public QuestionServiceImplementation(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
+    }
+
     @Override
     public List<QuestionDTO> findByQuizz(Integer id) {
         if (id == null) {

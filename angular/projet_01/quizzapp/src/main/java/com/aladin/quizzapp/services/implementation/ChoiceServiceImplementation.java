@@ -20,6 +20,11 @@ public class ChoiceServiceImplementation implements ChoiceService {
 
     private ChoiceRepository choiceRepository;
 
+
+    public ChoiceServiceImplementation(ChoiceRepository choiceRepository) {
+        this.choiceRepository = choiceRepository;
+    }
+
     @Override
     public List<ChoiceDTO> findChoicesByQuestionId(Integer id) {
         if (id == null) {
