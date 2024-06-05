@@ -5,14 +5,12 @@ import java.util.List;
 
 import org.springframework.util.StringUtils;
 
-import com.aladin.quizzapp.dto.UserDTO;
-
-public class UserValidator {
-    
+import com.aladin.quizzapp.dto.RegisterDTO;
 
 
+public class RegisterValidator {
 
-    public static List<String> validate(UserDTO user) {
+        public static List<String> validate(RegisterDTO user) {
 
         List<String> errors = new ArrayList<>();
 
@@ -20,6 +18,8 @@ public class UserValidator {
             errors.add("The field email is empty !");
             errors.add("The field username is empty !");
             errors.add("The field password is empty !");
+            errors.add("The password is too short !");
+
 
         } else {
 
@@ -43,13 +43,21 @@ public class UserValidator {
             
             if (!StringUtils.hasLength(user.getPassword())) {
                 errors.add("The field password is empty !");
+            } else {
+                if (user.getPassword().length() <= 5 ) {
+                    errors.add("The password is too short !");
+                }
+
+            }
+
+            if (user.getIsTeacher() == null) {
+                errors.add("The field isTeacher not provided !");
             }
 
         }
 
-
         return errors;
 
     }
-
+    
 }

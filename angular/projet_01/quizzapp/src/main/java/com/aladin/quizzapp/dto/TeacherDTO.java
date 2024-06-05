@@ -7,13 +7,13 @@ import com.aladin.quizzapp.models.TeacherEntity;
 import com.aladin.quizzapp.models.UserEntity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+// import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+// @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
@@ -39,7 +39,7 @@ public class TeacherDTO extends UserDTO {
 
         dto.setId(teacherEntity.getId());
         dto.setUsername(teacherEntity.getUsername());
-        dto.setMail(teacherEntity.getMail());
+        dto.setEmail(teacherEntity.getEmail());
         dto.setPassword(teacherEntity.getPassword());
         dto.setQuizzs(teacherEntity.getQuizzs().stream().map(QuizzDTO::fromEntity).collect(Collectors.toList()));
 
@@ -57,7 +57,7 @@ public class TeacherDTO extends UserDTO {
         TeacherEntity entity = new TeacherEntity();
         entity.setId(dto.getId());
         entity.setUsername(dto.getUsername());
-        entity.setMail(dto.getMail());
+        entity.setEmail(dto.getEmail());
         entity.setPassword(dto.getPassword());
         entity.setQuizzs(dto.getQuizzs().stream().map(QuizzDTO::toEntity).collect(Collectors.toList()));
 
