@@ -50,9 +50,6 @@ public class RegisterValidator {
 
             }
 
-            if (user.getIsTeacher() == null) {
-                errors.add("The field isTeacher not provided !");
-            }
 
         }
 

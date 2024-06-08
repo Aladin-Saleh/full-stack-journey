@@ -13,6 +13,5 @@ public class RegisterDTO {
     
     private String password;
 
-    private Boolean isTeacher;
     
 }

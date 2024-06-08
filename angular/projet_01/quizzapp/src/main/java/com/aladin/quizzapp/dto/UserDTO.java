@@ -22,6 +22,8 @@ public class UserDTO {
 
     private String password;
 
+    private RoleDTO role;
+
     public static UserDTO fromEntity(UserEntity user) {
 
         if (user == null) {
@@ -33,6 +35,7 @@ public class UserDTO {
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .password(user.getPassword())
+                .role(RoleDTO.builder().libelle(user.getRole().getLibelle()).build())
                 .build();
 
         return dto;
@@ -49,6 +52,7 @@ public class UserDTO {
         entity.setUsername(user.getUsername());
         entity.setEmail(user.getEmail());
         entity.setPassword(user.getPassword());
+        entity.setRole(RoleDTO.toEntity(user.getRole()));
 
         return entity;
 

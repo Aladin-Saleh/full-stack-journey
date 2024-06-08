@@ -1,28 +1,23 @@
 package com.aladin.quizzapp.controllers.api;
 
-import java.util.List;
 
-import com.aladin.quizzapp.dto.LoginDTO;
-import com.aladin.quizzapp.dto.RegisterDTO;
+import java.util.Map;
+
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.aladin.quizzapp.dto.AuthentificationDTO;
 import com.aladin.quizzapp.dto.UserDTO;
-
 
 
 public interface UserAPI {
 
-    UserDTO register(RegisterDTO userDTO);
+    @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
+    void register(@RequestBody UserDTO userDTO);
 
-    UserDTO login(LoginDTO userDTO);
+    @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
+    Map<String, String> connection(@RequestBody AuthentificationDTO user);
 
-    UserDTO findByUsername(String username);
-
-    UserDTO findByEmail(String email);
-
-    UserDTO findById(Integer id);
-
-
-    void delete(Integer id);
-
-    List<UserDTO> findAll();
 
 }

@@ -41,7 +41,8 @@ public class TeacherDTO extends UserDTO {
         dto.setUsername(teacherEntity.getUsername());
         dto.setEmail(teacherEntity.getEmail());
         dto.setPassword(teacherEntity.getPassword());
-        dto.setQuizzs(teacherEntity.getQuizzs().stream().map(QuizzDTO::fromEntity).collect(Collectors.toList()));
+        dto.setQuizzs(teacherEntity.getQuizzs() != null ? teacherEntity.getQuizzs().stream().map(QuizzDTO::fromEntity).collect(Collectors.toList()) : null);
+
 
         return dto;
 
@@ -59,7 +60,7 @@ public class TeacherDTO extends UserDTO {
         entity.setUsername(dto.getUsername());
         entity.setEmail(dto.getEmail());
         entity.setPassword(dto.getPassword());
-        entity.setQuizzs(dto.getQuizzs().stream().map(QuizzDTO::toEntity).collect(Collectors.toList()));
+        entity.setQuizzs(dto.getQuizzs() != null ? dto.getQuizzs().stream().map(QuizzDTO::toEntity).collect(Collectors.toList()) : null);
 
         return entity;
     }

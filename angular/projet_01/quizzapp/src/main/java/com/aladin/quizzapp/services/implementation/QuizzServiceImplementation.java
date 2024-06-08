@@ -4,14 +4,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.aladin.quizzapp.dto.QuizzDTO;
+import com.aladin.quizzapp.dto.RoleDTO;
+import com.aladin.quizzapp.dto.TeacherDTO;
+import com.aladin.quizzapp.dto.UserDTO;
 import com.aladin.quizzapp.exception.EntityNotFoundException;
 import com.aladin.quizzapp.exception.ErrorCodes;
 import com.aladin.quizzapp.exception.InvalidEntityException;
 import com.aladin.quizzapp.models.QuizzEntity;
+import com.aladin.quizzapp.models.UserEntity;
 import com.aladin.quizzapp.repository.QuizzRepository;
 import com.aladin.quizzapp.services.QuizzService;
 import com.aladin.quizzapp.validator.QuizzValidator;
@@ -73,7 +78,20 @@ public class QuizzServiceImplementation implements QuizzService {
 
     @Override
     public QuizzDTO save(QuizzDTO quizzDTO) {
+        UserEntity user = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // quizzDTO.setTeacherDTO(UserDTO.fromEntity(user));
+        TeacherDTO teacher = new TeacherDTO();
+        teacher.setUsername(user.getUsername());
+        teacher.setId(user.getId());
+        teacher.setPassword(user.getPassword());
+        teacher.setRole(RoleDTO.fromEntity(user.getRole()));
+        teacher.setEmail(user.getEmail());
+        
+        quizzDTO.setTeacherDTO(teacher);
+
+
         List<String> errors = QuizzValidator.validate(quizzDTO);
+
 
         if (!errors.isEmpty()) {
             log.error("Quizz do not have a valid format !", errors);

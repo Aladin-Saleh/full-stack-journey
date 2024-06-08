@@ -1,65 +1,50 @@
 package com.aladin.quizzapp.controllers;
 
-import java.util.List;
 
+import java.util.Map;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aladin.quizzapp.config.JWTService;
 import com.aladin.quizzapp.controllers.api.UserAPI;
-import com.aladin.quizzapp.dto.LoginDTO;
-import com.aladin.quizzapp.dto.RegisterDTO;
+import com.aladin.quizzapp.dto.AuthentificationDTO;
 import com.aladin.quizzapp.dto.UserDTO;
-import com.aladin.quizzapp.services.UserService;
+import com.aladin.quizzapp.services.implementation.UserServiceImplementation;
 
-
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@Slf4j
+@AllArgsConstructor
 public class UserController implements UserAPI {
 
-
-    private UserService userService;
+    private UserServiceImplementation userService;
+    private AuthenticationManager authenticationManager;
+    private JWTService jwtService;
 
     @Override
-    public UserDTO register(RegisterDTO userDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'register'");
+    public void register(UserDTO userDTO) {
+
+        log.info("inscription");
+        this.userService.register(userDTO);
     }
 
     @Override
-    public UserDTO login(LoginDTO userDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'login'");
+    public Map<String, String> connection(AuthentificationDTO user) {
+
+        final Authentication auth = this.authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(user.username(), user.password())
+        );
+        log.info("resultat {}", auth.isAuthenticated());
+        if (auth.isAuthenticated()) {
+            return this.jwtService.generate(user.username());
+        }
+
+        return null;
     }
 
-    @Override
-    public UserDTO findByUsername(String username) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByUsername'");
-    }
-
-    @Override
-    public UserDTO findByEmail(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByEmail'");
-    }
-
-    @Override
-    public UserDTO findById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
-    }
-
-
-    @Override
-    public void delete(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
-
-    @Override
-    public List<UserDTO> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
-    }
-
-    
 }

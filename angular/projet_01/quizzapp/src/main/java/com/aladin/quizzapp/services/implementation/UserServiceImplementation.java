@@ -1,135 +1,79 @@
 package com.aladin.quizzapp.services.implementation;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import com.aladin.quizzapp.dto.LoginDTO;
-import com.aladin.quizzapp.dto.RegisterDTO;
+import com.aladin.quizzapp.dto.RoleDTO;
 import com.aladin.quizzapp.dto.UserDTO;
 import com.aladin.quizzapp.exception.ErrorCodes;
 import com.aladin.quizzapp.exception.InvalidEntityException;
+import com.aladin.quizzapp.models.TypeRole;
 import com.aladin.quizzapp.models.UserEntity;
 import com.aladin.quizzapp.repository.UserRepository;
 import com.aladin.quizzapp.services.UserService;
-import com.aladin.quizzapp.validator.RegisterValidator;
+import com.aladin.quizzapp.validator.UserValidator;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 @Service
 @Slf4j
-public class UserServiceImplementation implements UserService {
+public class UserServiceImplementation implements UserService, UserDetailsService {
 
     private UserRepository userRepository;
 
-    // private PasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImplementation(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImplementation(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        // this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public UserDTO register(RegisterDTO registerDTO) {
-        List<String> errors = RegisterValidator.validate(registerDTO);
+    public void register(UserDTO user) {
+        RoleDTO role = new RoleDTO();
+        List<String> errors = UserValidator.validate(user);
 
+        if (user == null) {
+            log.error("No user provided !");
+            return;
+        }
 
         if (!errors.isEmpty()) {
-            log.error("The register's informations provided are not valid !");
-            throw new InvalidEntityException("The register's informations provided are not valid !", ErrorCodes.USER_NOT_VALID, errors);
+            log.error("Invalid user provided !", errors);
+            throw new InvalidEntityException("Invalid user provided !", ErrorCodes.USER_NOT_VALID, errors);
         }
 
+        role.setLibelle(TypeRole.STUDENT);
+        user.setRole(role);
 
-        if (this.isEmailExist(registerDTO.getEmail())) {
-            log.error("The email provided is already used !");
-            throw new InvalidEntityException("The email provided is already used !", ErrorCodes.USER_NOT_VALID);
-        }
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 
-        return null;
-
+        this.userRepository.save(UserDTO.toEntity(user));
     }
 
+    // @Override
+    // public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-    public UserEntity createStudent(RegisterDTO register) {
-        // TODO : creation du student !
-        return null;
-    }
+    //     return this.userRepository.findByUsername(username)
+    //             .orElseThrow(() -> new UsernameNotFoundException("Username not valid/don't exist !"));
 
-    public UserEntity createTeacher(RegisterDTO register) {
-        // TODO : creation du teacher !
-        return null;
-    }
+    // }
 
     @Override
-    public UserDTO login(LoginDTO userDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'login'");
-    }
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserEntity userEntity = this.userRepository.findByUsername(username)
+        .orElseThrow(() -> new UsernameNotFoundException("Username not valid/don't exist!"));
 
-    @Override
-    public List<UserDTO> findByUsername(String username) {
+        new User(userEntity.getUsername(), userEntity.getPassword(), List.of(new SimpleGrantedAuthority(userEntity.getRole().getLibelle().name())));
 
-        if (username == null) {
-            log.error("No username provided !");
-            return null;
-        }
-
-        List<UserDTO> user = this.userRepository.findByUsername(username).stream().map(UserDTO::fromEntity)
-                .collect(Collectors.toList());
-        return user;
-
-    }
-
-    @Override
-    public UserDTO findByEmail(String email) {
-
-        if (email == null) {
-            log.error("No email provided !");
-            return null;
-        }
-
-        UserDTO user = UserDTO.fromEntity(this.userRepository.findByEmail(email));
-        return user;
-    }
-
-    @Override
-    public UserDTO findById(Integer id) {
-
-        if (id == null) {
-            log.error("No id provided !");
-            return null;
-        }
-
-        UserDTO user = UserDTO.fromEntity(this.userRepository.findById(id).orElse(null));
-        return user;
-    }
-
-    @Override
-    public void delete(Integer id) {
-
-        UserDTO isUserExist = UserDTO.fromEntity(this.userRepository.findById(id).orElse(null));
-        if (isUserExist == null) {
-            log.error("User id not valid !");
-            throw new InvalidEntityException("User id not valid !", ErrorCodes.USER_NOT_VALID);
-        }
-
-        this.userRepository.deleteById(id);
-    }
-
-
-    @Override
-    public List<UserDTO> findAll() {
-        return this.userRepository.findAll().stream().map(UserDTO::fromEntity).collect(Collectors.toList());
-    }
-
-    public Boolean isEmailExist(String email) {
-
-        return this.userRepository.findByEmail(email) != null;
+        return userEntity;
     }
 
 }
