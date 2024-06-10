@@ -4,6 +4,7 @@ package com.aladin.quizzapp.controllers.api;
 import java.util.Map;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -19,5 +20,7 @@ public interface UserAPI {
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
     Map<String, String> connection(@RequestBody AuthentificationDTO user);
 
+    @PostMapping(value = "/disconnect")
+    void logout();
 
 }

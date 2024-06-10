@@ -11,7 +11,6 @@ import org.springframework.util.StringUtils;
 import com.aladin.quizzapp.dto.QuizzDTO;
 import com.aladin.quizzapp.dto.RoleDTO;
 import com.aladin.quizzapp.dto.TeacherDTO;
-import com.aladin.quizzapp.dto.UserDTO;
 import com.aladin.quizzapp.exception.EntityNotFoundException;
 import com.aladin.quizzapp.exception.ErrorCodes;
 import com.aladin.quizzapp.exception.InvalidEntityException;
@@ -86,12 +85,10 @@ public class QuizzServiceImplementation implements QuizzService {
         teacher.setPassword(user.getPassword());
         teacher.setRole(RoleDTO.fromEntity(user.getRole()));
         teacher.setEmail(user.getEmail());
-        
+
         quizzDTO.setTeacherDTO(teacher);
 
-
         List<String> errors = QuizzValidator.validate(quizzDTO);
-
 
         if (!errors.isEmpty()) {
             log.error("Quizz do not have a valid format !", errors);
@@ -100,12 +97,12 @@ public class QuizzServiceImplementation implements QuizzService {
         return QuizzDTO.fromEntity(quizzRepository.save(QuizzDTO.toEntity(quizzDTO)));
     }
 
-
     @Override
     public QuizzDTO update(QuizzDTO quizzDTO) {
-        
+
         List<String> errors = QuizzValidator.validate(quizzDTO);
-        QuizzDTO isQuizzExist = QuizzDTO.fromEntity(this.quizzRepository.findById(QuizzDTO.toEntity(quizzDTO).getId()).orElse(null));
+        QuizzDTO isQuizzExist = QuizzDTO
+                .fromEntity(this.quizzRepository.findById(QuizzDTO.toEntity(quizzDTO).getId()).orElse(null));
 
         if (isQuizzExist == null) {
             log.error("The quizz provided doesn't exist !", quizzDTO.getId());
@@ -156,7 +153,5 @@ public class QuizzServiceImplementation implements QuizzService {
 
         this.quizzRepository.deleteById(id);
     }
-
-
 
 }

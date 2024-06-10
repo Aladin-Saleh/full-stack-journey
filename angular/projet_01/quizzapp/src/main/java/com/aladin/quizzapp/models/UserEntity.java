@@ -39,6 +39,8 @@ public class UserEntity extends AbstractEntity implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     private RoleEntity role;
 
+    // private J
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Role de l'utilisateur

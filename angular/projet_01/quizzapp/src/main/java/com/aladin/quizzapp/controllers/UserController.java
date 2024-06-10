@@ -47,4 +47,9 @@ public class UserController implements UserAPI {
         return null;
     }
 
+    @Override
+    public void logout() {
+        this.jwtService.logout();
+    }
+
 }

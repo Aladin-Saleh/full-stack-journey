@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.aladin.quizzapp.dto.JwtDTO;
 import com.aladin.quizzapp.services.implementation.UserServiceImplementation;
 
 import jakarta.servlet.FilterChain;
@@ -24,6 +25,7 @@ public class JWTFilter extends OncePerRequestFilter {
     private UserServiceImplementation userServiceImplementation;
     private JWTService jwtService;
 
+
     public JWTFilter(UserServiceImplementation userServiceImplementation, JWTService jwtService) {
         this.userServiceImplementation = userServiceImplementation;
         this.jwtService = jwtService;
@@ -36,17 +38,19 @@ public class JWTFilter extends OncePerRequestFilter {
         String token = null;
         String username = null;
         Boolean isTokenExpired = true;
+        JwtDTO jwtDTO = null;
 
 
         String requestAuth = request.getHeader("Authorization");
         if (StringUtils.hasLength(requestAuth) && requestAuth.startsWith("Bearer ")) {
             token = requestAuth.split(" ")[1];
+            jwtDTO = this.jwtService.getJwtDTO(token);
             isTokenExpired = jwtService.isTokenExpired(token);
             username = this.jwtService.extractUsername(token);
 
         }
 
-        if (!isTokenExpired && SecurityContextHolder.getContext().getAuthentication() == null && StringUtils.hasLength(username)) {
+        if (jwtDTO != null && jwtDTO.getUser().getUsername().equals(username) && !isTokenExpired && SecurityContextHolder.getContext().getAuthentication() == null && StringUtils.hasLength(username)) {
             UserDetails userDetails = this.userServiceImplementation.loadUserByUsername(username);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
