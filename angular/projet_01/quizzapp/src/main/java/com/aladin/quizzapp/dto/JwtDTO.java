@@ -2,7 +2,6 @@ package com.aladin.quizzapp.dto;
 
 
 import com.aladin.quizzapp.models.JwtEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Builder;
 import lombok.Data;

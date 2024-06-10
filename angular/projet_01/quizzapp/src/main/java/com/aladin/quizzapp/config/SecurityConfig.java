@@ -9,8 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+// import org.springframework.security.core.userdetails.UserDetailsService;
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 // import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -24,14 +24,14 @@ public class SecurityConfig {
 
 
     private JWTFilter jwtFilter;
-    private BCryptPasswordEncoder passwordEncoder;
-    private UserDetailsService userDetailsService;
+    // private BCryptPasswordEncoder passwordEncoder;
+    // private UserDetailsService userDetailsService;
     // private UserServiceImplementation userServiceImplementation;
 
-    public SecurityConfig(JWTFilter jwtFilter, BCryptPasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
+    public SecurityConfig(JWTFilter jwtFilter/*,BCryptPasswordEncoder passwordEncoder, UserDetailsService userDetailsService*/) {
         this.jwtFilter = jwtFilter;
-        this.passwordEncoder = passwordEncoder;
-        this.userDetailsService = userDetailsService;
+        // this.passwordEncoder = passwordEncoder;
+        // this.userDetailsService = userDetailsService;
     }
     
 
