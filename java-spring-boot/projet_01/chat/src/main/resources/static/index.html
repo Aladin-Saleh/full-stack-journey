@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+</head>
+
+<body>
+
+    <body>
+        <noscript>
+            <h2 class="text-center text-xl text-red-500">Sorry! Your browser doesn't support Javascript</h2>
+        </noscript>
+
+        <div id="username-page" class="flex items-center justify-center min-h-screen">
+            <div class="username-page-container bg-white p-8 rounded-lg shadow-lg">
+                <h1 class="title text-2xl mb-4">Type your username to enter the Chatroom</h1>
+                <form id="usernameForm" name="usernameForm" class="space-y-4">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Username" autocomplete="off"
+                            class="form-control border border-gray-300 rounded p-2 w-full" />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit"
+                            class="accent username-submit bg-blue-500 text-white p-2 rounded w-full">Start
+                            Chatting</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="chat-page" class="hidden min-h-screen flex flex-col">
+            <div class="chat-container flex-1 flex flex-col">
+                <div class="connecting flex items-center justify-center flex-1 text-gray-500">
+                    Connecting...
+                </div>
+                <ul id="messageArea" class="flex-1 overflow-auto p-4 space-y-2">
+
+                </ul>
+                <form id="messageForm" name="messageForm" class="p-4 bg-gray-100">
+                    <div class="form-group">
+                        <div class="input-group clearfix flex">
+                            <input type="text" id="message" placeholder="Type a message..." autocomplete="off"
+                                class="form-control flex-1 border border-gray-300 rounded p-2" />
+                            <button type="submit" class="primary bg-blue-500 text-white p-2 rounded ml-2">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="./js/main.js"></script>
+    </body>
+
+</html>
