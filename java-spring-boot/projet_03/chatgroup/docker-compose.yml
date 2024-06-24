@@ -1,0 +1,14 @@
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb_chatgroup
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=aladmin
+      - MONGO_INITDB_ROOT_PASSWORD=aladmin
+
+volumes:
+  mongo: {}
