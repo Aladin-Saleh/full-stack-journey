@@ -1,6 +1,5 @@
 package com.aladin.todolist.repository;
 
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,6 +9,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     User findByEmail(String email);
 
-    Optional<User> findByUsername(String username);
+    User findByUsername(String username);
     
 }

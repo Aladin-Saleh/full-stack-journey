@@ -20,7 +20,7 @@ public class ToDoListDTO {
 
     private List<TaskDTO> tasks;
 
-    private UserDTO user;
+    private String userId;
 
     public static ToDoList toEntity(ToDoListDTO dto) {
 
@@ -29,8 +29,11 @@ public class ToDoListDTO {
         }
     
         ToDoList toDoList = new ToDoList();
+        toDoList.setId(dto.getId());
         toDoList.setTasks(dto.getTasks().stream().map(TaskDTO::toEntity).collect(Collectors.toList()));
-        toDoList.setUser(UserDTO.toEntity(dto.getUser()));
+        
+        // toDoList.setUserId(dto.getUserId());
+
         
         return toDoList;
 
@@ -43,11 +46,12 @@ public class ToDoListDTO {
         }
 
         ToDoListDTO toDoListDTO = new ToDoListDTO();
+        toDoListDTO.setId(entity.getId());
         toDoListDTO.setTasks(entity.getTasks().stream().map(TaskDTO::fromEntity).collect(Collectors.toList()));
-        toDoListDTO.setUser(UserDTO.fromEntity(entity.getUser()));
-
+        toDoListDTO.setUserId(entity.getUserId());
         return toDoListDTO;
     }
 
     
 }
+

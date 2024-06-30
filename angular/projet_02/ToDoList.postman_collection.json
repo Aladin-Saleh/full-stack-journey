@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "fefe14cb-bae1-4381-90fb-0d4cb69c05b5",
+		"name": "ToDoList",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17618662"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"Alad1\",\r\n    \"email\" : \"aladin1@gmail.com\",\r\n    \"password\" : \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"Alad1\",\r\n    \"password\" : \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJlbWFpbCI6ImFsYWRpbjFAZ21haWwuY29tIiwiZXhwIjoxNzE5NzUxMTIzLCJ1c2VybmFtZSI6IkFsYWQxIiwic3ViIjoiQWxhZDEiLCJpYXQiOjE3MTk3NDc1MjN9.M9r1Gl1V18WUecUL_tjaau8uESpKuCm4-HQMU7cXxS0zml9znd3AI_EgypPwjMym",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/disconnect",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"disconnect"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"b6b08cea-152c-46ed-badd-48caa2ee6f75\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ToDoList",
+			"item": [
+				{
+					"name": "Create ToDo List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBbGFkMSIsInVzZXJuYW1lIjoiQWxhZDEiLCJleHAiOjE3MTk3Njg3NjAsImVtYWlsIjoiYWxhZGluMUBnbWFpbC5jb20iLCJpYXQiOjE3MTk3NjUxNjB9.e_K888k_Qy798IZkJTcyvk6C2VaVJenND2zw0e0qSWJenKV0bGFudDVpEjxvwEOB",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/todolist/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"todolist",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get To List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBbGFkMSIsInVzZXJuYW1lIjoiQWxhZDEiLCJleHAiOjE3MTk3Njg3NjAsImVtYWlsIjoiYWxhZGluMUBnbWFpbC5jb20iLCJpYXQiOjE3MTk3NjUxNjB9.e_K888k_Qy798IZkJTcyvk6C2VaVJenND2zw0e0qSWJenKV0bGFudDVpEjxvwEOB",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/todolist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"todolist"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "Create task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBbGFkMSIsInVzZXJuYW1lIjoiQWxhZDEiLCJleHAiOjE3MTk3Njg3NjAsImVtYWlsIjoiYWxhZGluMUBnbWFpbC5jb20iLCJpYXQiOjE3MTk3NjUxNjB9.e_K888k_Qy798IZkJTcyvk6C2VaVJenND2zw0e0qSWJenKV0bGFudDVpEjxvwEOB",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"testaze ra2\",\r\n    \"content\": \"aazer azer azer azer  task content\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/task/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"task",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBbGFkMSIsInVzZXJuYW1lIjoiQWxhZDEiLCJleHAiOjE3MTk3Njg3NjAsImVtYWlsIjoiYWxhZGluMUBnbWFpbC5jb20iLCJpYXQiOjE3MTk3NjUxNjB9.e_K888k_Qy798IZkJTcyvk6C2VaVJenND2zw0e0qSWJenKV0bGFudDVpEjxvwEOB",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/task/delete/24f5ea14-123e-4279-83b5-e4c5f1ec9cc0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"task",
+								"delete",
+								"24f5ea14-123e-4279-83b5-e4c5f1ec9cc0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBbGFkMSIsInVzZXJuYW1lIjoiQWxhZDEiLCJleHAiOjE3MTk3Njg3NjAsImVtYWlsIjoiYWxhZGluMUBnbWFpbC5jb20iLCJpYXQiOjE3MTk3NjUxNjB9.e_K888k_Qy798IZkJTcyvk6C2VaVJenND2zw0e0qSWJenKV0bGFudDVpEjxvwEOB",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"2ec5b4e4-8bf9-4d4e-9dcf-93bc085d3cb0\",\r\n    \"title\": \"test updatre\",\r\n    \"content\": \"test task content\",\r\n    \"toDolistId\": \"33f34fd2-f57c-4d95-a20b-52e7ac109e8c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/task/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"task",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBbGFkMSIsInVzZXJuYW1lIjoiQWxhZDEiLCJleHAiOjE3MTk3Njg3NjAsImVtYWlsIjoiYWxhZGluMUBnbWFpbC5jb20iLCJpYXQiOjE3MTk3NjUxNjB9.e_K888k_Qy798IZkJTcyvk6C2VaVJenND2zw0e0qSWJenKV0bGFudDVpEjxvwEOB",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/task/2ec5b4e4-8bf9-4d4e-9dcf-93bc085d3cb0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"task",
+								"2ec5b4e4-8bf9-4d4e-9dcf-93bc085d3cb0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

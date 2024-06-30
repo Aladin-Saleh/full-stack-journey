@@ -45,6 +45,11 @@ public class  UserServiceImplementation implements UserService, UserDetailsServi
             throw new InvalidEntityException("Invalid user provided : Email is already used !", ErrorCodes.USER_NOT_VALID);
         }
 
+        if (isUsernameAlreadyUse(user.getUsername()))
+        {
+            throw new InvalidEntityException("Invalid user provided : Username is already used !", ErrorCodes.USER_NOT_VALID);
+        }
+
         role.setRole(TypeRole.USER);
         user.setRole(role);
         log.info("User {} was registered", user.getEmail());
@@ -65,12 +70,21 @@ public class  UserServiceImplementation implements UserService, UserDetailsServi
         return user != null; 
     }
 
+    public boolean isUsernameAlreadyUse(String username)
+    {
+        UserDTO user = UserDTO.fromEntity(this.repository.findByUsername(username));
+
+        return user != null; 
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = this.repository.findByUsername(username)
-        .orElseThrow(() -> new UsernameNotFoundException("Username not valid/don't exist!"));
-
+        User user = this.repository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid user provided");
+        }
+        
         new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), List.of(new SimpleGrantedAuthority(user.getRole().getRole().name())));
 
         return user;

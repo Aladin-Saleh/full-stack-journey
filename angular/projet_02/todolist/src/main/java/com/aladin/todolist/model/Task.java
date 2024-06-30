@@ -19,6 +19,10 @@ import lombok.NoArgsConstructor;
 @Table(name = "task")
 public class Task {
 
+
+    
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;

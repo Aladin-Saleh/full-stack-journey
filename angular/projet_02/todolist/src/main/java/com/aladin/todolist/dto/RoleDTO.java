@@ -25,6 +25,7 @@ public class RoleDTO {
         }
     
         Role role = new Role();
+        role.setId(dto.getId());
         role.setRole(dto.getRole());
         
         return role;
@@ -39,6 +40,7 @@ public class RoleDTO {
         }
 
         RoleDTO role = RoleDTO.builder()
+        .id(entity.getId())
         .role(entity.getRole())
         .build();
 

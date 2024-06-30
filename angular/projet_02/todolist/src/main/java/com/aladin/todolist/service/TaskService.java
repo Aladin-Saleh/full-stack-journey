@@ -10,4 +10,6 @@ public interface TaskService {
 
     void deleteTask(String taskId);
 
+    void changeStatus(String taskId);
+
 }

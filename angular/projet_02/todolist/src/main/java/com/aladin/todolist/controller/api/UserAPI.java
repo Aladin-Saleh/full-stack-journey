@@ -23,5 +23,8 @@ public interface UserAPI {
     @PostMapping(value = "/disconnect")
     void logout();
 
+    @PostMapping(value = "/refresh")
+    Map<String, String> refresh(@RequestBody Map<String, String> refreshToken);
+
 
 }

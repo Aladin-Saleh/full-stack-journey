@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aladin.todolist.config.JWTService;
 import com.aladin.todolist.controller.api.UserAPI;
 import com.aladin.todolist.dto.AuthentificationDTO;
 import com.aladin.todolist.dto.UserDTO;
@@ -23,8 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController implements UserAPI {
 
     private final UserServiceImplementation userService;
-    private AuthenticationManager authenticationManager;
-    // private JWTService jwtService;
+    private final AuthenticationManager authenticationManager;
+    private JWTService jwtService;
 
     
     @Override
@@ -50,14 +51,13 @@ public class UserController implements UserAPI {
     }
 
     @Override
-    public Map<String, String> connection(AuthentificationDTO user) {
+    public Map<String, String> connection(AuthentificationDTO authDTO) {
 
-        final Authentication auth = this.authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(user.username(), user.password())
-        );
+        final Authentication auth = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authDTO.username(), authDTO.password()));
+
         log.info("resultat {}", auth.isAuthenticated());
         if (auth.isAuthenticated()) {
-            // return this.jwtService.generate(user.username());
+            return this.jwtService.generate(authDTO.username());
         }
 
         return null;
@@ -65,8 +65,13 @@ public class UserController implements UserAPI {
 
     @Override
     public void logout() {
-        // TODO Auto-generated method stub
-        
+        this.jwtService.logout();
+    }
+
+    @Override
+    public Map<String, String> refresh(Map<String, String> refreshToken) {
+
+        return this.jwtService.refreshToken(refreshToken);
     }
 
     

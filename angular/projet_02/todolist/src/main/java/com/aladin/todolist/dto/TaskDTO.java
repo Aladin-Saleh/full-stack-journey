@@ -2,6 +2,7 @@ package com.aladin.todolist.dto;
 
 import com.aladin.todolist.model.Status;
 import com.aladin.todolist.model.Task;
+import com.aladin.todolist.model.ToDoList;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,9 +23,7 @@ public class TaskDTO {
 
     private Status status;
 
-    private ToDoListDTO toDolist;
-
-
+    private String toDolistId;
 
 
 
@@ -33,13 +32,13 @@ public class TaskDTO {
         if (dto == null) {
             return null;
         }
-    
+
         Task task = new Task();
+        task.setId(dto.getId());
         task.setContent(dto.getContent());
         task.setStatus(dto.getStatus());
         task.setTitle(dto.getTitle());
-        task.setToDoList(ToDoListDTO.toEntity(dto.getToDolist()));
-        
+        task.setToDoList(new ToDoList(dto.getToDolistId()));        
         
         return task;
 
@@ -53,10 +52,11 @@ public class TaskDTO {
         }
 
         TaskDTO task = TaskDTO.builder()
+        .id(entity.getId())
         .content(entity.getContent())
         .title(entity.getTitle())
         .status(entity.getStatus())
-        .toDolist(ToDoListDTO.fromEntity(entity.getToDoList()))
+        .toDolistId(entity.getToDoList().getId())
         .build();
 
         return task;
@@ -64,3 +64,4 @@ public class TaskDTO {
     }
 
 }
+ 

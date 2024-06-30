@@ -25,7 +25,8 @@ public class UserDTO {
 
     private RoleDTO role;
 
-    private ToDoListDTO toDoList;
+    private String toDoListId;
+
 
 
     
@@ -35,12 +36,14 @@ public class UserDTO {
             return null;
         }
     
-        User user = new User();
-        user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
-        user.setRole(RoleDTO.toEntity(dto.getRole()));
-        user.setToDoList(ToDoListDTO.toEntity(dto.getToDoList()));
-        user.setUsername(dto.getUsername());
+        User user = User.builder()
+        .id(dto.getId())
+        .email(dto.getEmail())
+        .username(dto.getUsername())
+        .password(dto.getPassword())
+        .role(RoleDTO.toEntity(dto.getRole()))
+        .toDoListId(dto.getToDoListId())
+        .build();
         
         
         return user;
@@ -54,11 +57,12 @@ public class UserDTO {
         }
 
         UserDTO user = UserDTO.builder()
+        .id(entity.getId())
         .email(entity.getEmail())
         .username(entity.getUsername())
         .password(entity.getPassword())
         .role(RoleDTO.builder().role(entity.getRole().getRole()).build())
-        .toDoList(ToDoListDTO.fromEntity(entity.getToDoList()))
+        .toDoListId(entity.getToDoListId())
         .build();
 
         return user;

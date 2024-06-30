@@ -4,6 +4,8 @@ import com.aladin.todolist.dto.ToDoListDTO;
 
 public interface ToDoListService {
     
-    ToDoListDTO findByUser(String userId);
+    ToDoListDTO findByUser();
+
+    ToDoListDTO create(ToDoListDTO toDoList);
 
 }
