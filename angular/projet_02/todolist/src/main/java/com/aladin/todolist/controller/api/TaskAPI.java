@@ -21,7 +21,7 @@ public interface TaskAPI {
     ResponseEntity<Object> createTask(@RequestBody TaskDTO task);
 
     @PutMapping(value = API + TASK_API + "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Object> updateTask(@RequestBody TaskDTO task);
+    ResponseEntity<Object > updateTask(@RequestBody TaskDTO task);
 
     @DeleteMapping(value = API + TASK_API + "/delete/{taskId}")
     void deleteTask(@PathVariable String taskId);

@@ -35,17 +35,19 @@ public class UserController implements UserAPI {
 
             log.info("Registering user {}", userDTO.getEmail());
             this.userService.register(userDTO);
-            return ResponseEntity.ok().body("User registered successfully");
+            // Return json format object
+            return ResponseEntity.status(201).body("{\"message\":\"User registered successfully\"}");
+            
 
         } catch (InvalidEntityException exception) {
 
             log.error("Error during registration of user {}", userDTO.getEmail(), exception);
-            return ResponseEntity.badRequest().body(exception.getMessage());
+            return ResponseEntity.badRequest().body("{\"message\":\"" + exception.getMessage() + "\"}");
 
         } catch (Exception exception) {
 
             log.error("Error during registration of user {}", userDTO.getEmail(), exception);
-            return ResponseEntity.status(500).body(exception.getMessage());
+            return ResponseEntity.status(500).body("{\"message\":\"" + exception.getMessage() + "\"}");
 
         }
     }

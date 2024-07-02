@@ -1,0 +1,46 @@
+<div
+    class="min-h-screen bg-gradient-to-r from-black to-gray-900 flex items-center justify-center text-white transition-height">
+    <div class="p-8 rounded-lg shadow-lg w-full max-w-lg bg-white text-black custom-shadow transition-height">
+        <div *ngIf="!isTodoListExist; else toDoListExist">
+            <button (click)="createToDoList()"
+                class="w-full bg-black text-white py-2 rounded hover:bg-gray-700 transition-colors duration-300">
+                Create your To Do List !
+            </button>
+        </div>
+
+        <ng-template #toDoListExist>
+            <div class="transition-height">
+                <div class="flex space-x-4 mb-4 transition-height">
+                    <button (click)="filterTasks('ALL')"
+                        class="bg-black text-white py-2 px-4 rounded-full hover:bg-gray-700 transition-colors duration-300">
+                        ALL
+                    </button>
+
+                    <button (click)="filterTasks('COMPLETED')"
+                        class="bg-black text-white py-2 px-4 rounded-full hover:bg-gray-700 transition-colors duration-300">
+                        COMPLETED
+                    </button>
+
+                    <button (click)="filterTasks('NOT_COMPLETED')"
+                        class="bg-black text-white py-2 px-4 rounded-full hover:bg-gray-700 transition-colors duration-300">
+                        NOT COMPLETED
+                    </button>
+
+                </div>
+                <div class="max-h-80 overflow-y-auto transition-all duration-300 ease-in-out">
+                    <app-task [filter]="currentFilter" [tasks]="filteredTasks"></app-task>
+                </div>
+            </div>
+
+            <div>
+                <button (click)="openCreateTaskModal()"
+                    class="bg-black text-white py-2 px-4 rounded-full hover:bg-gray-700 transition-colors duration-300">
+                    Create new task
+                </button>
+            </div>
+
+            <app-crud-task-modal *ngIf="isCreateTaskModalOpen" [isCreateTaskModalOpen]="isCreateTaskModalOpen"
+                (closeCreateTaskModalEvent)="closeCreateTaskModal()"></app-crud-task-modal>
+        </ng-template>
+    </div>
+</div>

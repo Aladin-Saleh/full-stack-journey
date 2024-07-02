@@ -1,0 +1,30 @@
+.custom-shadow {
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.7), 0 20px 25px rgba(255, 255, 255, 0.5), 0 40px 50px rgba(255, 255, 255, 0.4);
+}
+
+.transition-height {
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  overflow: hidden;
+}
+
+/* Custom scrollbar styles */
+.max-h-80::-webkit-scrollbar {
+  width: 12px;
+}
+
+.max-h-80::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.max-h-80::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 10px;
+  border: 3px solid transparent; /* Add some space around the thumb */
+  background-clip: padding-box; /* Clip background to avoid color bleed */
+}
+
+/* For Firefox */
+.max-h-80 {
+  scrollbar-width: thin;
+  scrollbar-color: black transparent;
+}
