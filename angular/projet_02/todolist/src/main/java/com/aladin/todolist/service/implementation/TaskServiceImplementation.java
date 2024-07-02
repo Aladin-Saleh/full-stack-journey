@@ -38,7 +38,7 @@ public class TaskServiceImplementation implements TaskService {
         UserDTO user = UserDTO.fromEntity((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         ToDoList tdl = toDoListRepository.findByUserId(user.getId());
 
-
+        log.info("Creating task : {}", user.getId());
         final TaskDTO taskDTO = TaskDTO.builder()
         .content(task.getContent())
         .status(Status.NOT_COMPLETED)

@@ -39,7 +39,8 @@ export class TodolistComponent {
   }
 
   closeCreateTaskModal() {
-    this.isCreateTaskModalOpen = false ;
+    this.isCreateTaskModalOpen = false;
+    this.getToDoList();
 
   }
 
@@ -48,6 +49,7 @@ export class TodolistComponent {
       next: (data: Todolist) => {
         this.isTodoListExist = true;
         console.log(data);
+
       },
       error: (error) => {
         console.error(error);

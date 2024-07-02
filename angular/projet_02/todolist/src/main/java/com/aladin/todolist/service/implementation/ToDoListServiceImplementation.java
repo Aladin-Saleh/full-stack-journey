@@ -3,6 +3,7 @@ package com.aladin.todolist.service.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import com.aladin.todolist.dto.ToDoListDTO;
 import com.aladin.todolist.dto.UserDTO;
 import com.aladin.todolist.exception.ErrorCodes;
 import com.aladin.todolist.exception.InvalidEntityException;
+import com.aladin.todolist.model.ToDoList;
 import com.aladin.todolist.model.User;
 import com.aladin.todolist.repository.ToDoListRepository;
 import com.aladin.todolist.service.ToDoListService;
@@ -54,6 +56,7 @@ public class ToDoListServiceImplementation implements ToDoListService {
     @Override
     public ToDoListDTO create(ToDoListDTO toDoList) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        log.info("User from header : {}", user);
         
         List<TaskDTO> tasks = new ArrayList<>();
         toDoList.setUserId(user.getId());
@@ -71,7 +74,12 @@ public class ToDoListServiceImplementation implements ToDoListService {
         }
 
 
-        return ToDoListDTO.fromEntity(repository.save(ToDoListDTO.toEntity(toDoList)));
+        ToDoList toSave = ToDoListDTO.toEntity(toDoList);
+        toSave.setUserId(user.getId());
+        toSave.setTasks(tasks.stream().map(TaskDTO::toEntity).collect(Collectors.toList()));
+        toSave.setId(toDoList.getId());
+        // return ToDoListDTO.fromEntity(repository.save(ToDoListDTO.toEntity(toDoList)));
+        return ToDoListDTO.fromEntity(repository.save(toSave));
 
 
 
