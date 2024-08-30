@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,7 +33,8 @@ public class QuestionEntity extends AbstractEntity {
     @JoinColumn(name = "quizzid")
     private QuizzEntity quizz;
 
-    @Column(name = "response")
+    @OneToOne
+    @JoinColumn(name = "response_id")
     private ChoiceEntity response;
 
 }

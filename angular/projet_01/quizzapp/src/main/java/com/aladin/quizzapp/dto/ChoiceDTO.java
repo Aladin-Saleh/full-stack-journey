@@ -13,6 +13,9 @@ public class ChoiceDTO {
 
     private QuestionDTO question;
 
+    private QuestionDTO responseForQuestion;
+    
+
     private String content;
 
 
@@ -27,6 +30,7 @@ public class ChoiceDTO {
                 .id(entity.getId())
                 .content(entity.getContent())
                 .question(QuestionDTO.fromEntity(entity.getQuestion()))
+                .responseForQuestion(QuestionDTO.fromEntity(entity.getResponseForQuestion()))
                 .build();
     }
 
@@ -42,6 +46,7 @@ public class ChoiceDTO {
         ChoiceEntity entity = new ChoiceEntity();
         entity.setId(dto.getId());
         entity.setContent(dto.getContent());
+        entity.setResponseForQuestion(QuestionDTO.toEntity(dto.getResponseForQuestion()));
         entity.setQuestion(QuestionDTO.toEntity(dto.getQuestion()));
 
         return entity;
